@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.redhat.login.mapper.UserMapper">
+	<!-- 获取用户Id -->
+	<select id="getId" parameterType="string" resultType="int">
+		SELECT IFNULL(max(id), -1) AS id 
+		FROM tb_user
+		WHERE username = #{username}
+	</select>
+	
+	<!-- 获取用户密码 -->
+	<select id="getPassword" parameterType="int" resultType="string">
+		SELECT password
+		FROM tb_user
+		WHERE id = #{id}
+	</select>
+
+	<!-- 添加用户 -->
+	<insert id="addUser">
+		INSERT INTO
+		tb_user(username, password)
+		VALUES (#{username}, #{password})
+	</insert>
+
+	<!-- 更新最后登录时间 -->
+	<update id="updateOnline">
+		UPDATE tb_user
+		SET online = #{date}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 获取最后登录时间 -->
+	<select id="getOnline" parameterType="int" resultType="Date">
+		SELECT online
+		FROM tb_user
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 更新是否允许登录 -->
+	<update id="updateEnable">
+		UPDATE tb_user
+		SET enable = #{enable}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 获取是否允许登录 -->
+	<select id="getEnable" parameterType="int" resultType="boolean">
+		SELECT enable
+		FROM tb_user
+		WHERE id = #{id}
+	</select>
+</mapper>
