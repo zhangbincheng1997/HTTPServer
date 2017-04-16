@@ -92,32 +92,32 @@ public static final String Send_Mail = "sendMail"; // 发送邮件
 ```
 
 ## 消息组成
-1、消息类HttpMsg = code(协议码int) + data(数据string)。  
-2、data是JSON字符串，通过JSON.toJSONString序列化特定的类。  
-3、HttpMsg类同样通过JSON.toJSONString序列化为JSON字符串。  
-4、最后HttpMsg经过HttpHandler的Base64编码或者AES加密（取决于Consts配置），防止抓包消息内容。  
+`HttpMsg = code(协议码int) + data(数据string)`  
+1、data是JSON字符串，通过JSON.toJSONString序列化特定的类。  
+2、HttpMsg类同样通过JSON.toJSONString序列化为JSON字符串。  
+3、最后HttpMsg经过HttpHandler的Base64编码或者AES加密（取决于Consts配置），防止抓包消息内容。  
 ```HttpMsg
 private int code; // 协议码
 public String data; // 数据
 ```
 
 ## 客户端测试
-测试文件在LoginServer的test/java包下的HttpClient.java，内含几种测试请求。  
+测试文件在LoginServer的test/java包下的`HttpClient.java`，内含几种测试请求。  
 ![此处输入图片的描述][4]
 
 ## 服务端解释
-0、LoginServer、GateServer、RPCServer工程共同文件：  
-core包：  
+0、`LoginServer`、`GateServer`、`RPCServer`工程共同文件：  
+`core`包：  
 ----GameInit，开启、关闭服务器的主函数入口  
 ----GameServer，服务器管理封装  
 ----GameServerMBean，服务器管理接口  
-protocol包：  
+`protocol`包：  
 ----Consts，常量  
 ----HttpMsg，消息体  
 ----RequestCode，请求码  
 ----ResultCode，响应码  
 ----RPCCode，RPC通讯码  
-util包：  
+`util`包：  
 ----AES，高级对称加密算法  
 ----Authentication，session生成、session认证  
 ----Coder，Base64加解密、MD5、SHA1加密  
@@ -126,55 +126,54 @@ util包：
 ----Redis，Redis工具类  
 ----SqlSessionFactoryUtil，Mybatis工厂类  
 
-1、LoginServer工程：  
-handler包：  
+1、`LoginServer`工程：  
+`handler`包：  
 ----UesrHanler，处理用户登录注册事件  
-manager包：  
+`manager`包：  
 ----ShieldManager，屏蔽词数据库管理类  
 ----UserManager，用户数据库管理类  
-mapper包：  
+`mapper`包：  
 ----ShieldMapper，屏蔽词Mybatis映射类  
 ----UserMapper，用户Mybatis映射类  
-model包：  
+`model`包：  
 ----UserModel，用户信息模型  
 ----UserReq，用户信息请求模型  
-server包：  
+`server`包：  
 ----HttpHandler，消息接收、发送处理类  
 ----HttpServer，由Netty实现的HTTP服务端  
 ----Router，转发消息到对应Handler处理  
 
-2、GateServer工程：  
-server包：  
+2、`GateServer`工程：  
+`server`包：  
 ----HttpHandler，消息接收、发送处理类  
 ----HttpServer，由Netty实现的HTTP服务端  
 ----Router，转发消息到对应Handler处理  
 ----RPC，Gate服务端与RPC服务端交互的管理类  
 
-3、RPCServer工程：  
-manager包：  
+3、`RPCServer`工程：  
+`manager`包：  
 ----InfoManager，用户信息数据库管理类  
 ----MailManager，邮件数据库管理类  
 ----ScoreManager，成绩数据库管理类  
-mapper包：  
+`mapper`包：  
 ----InfoMapper，用户信息Mybatis映射类  
 ----MailMapper，邮件Mybatis映射类  
 ----ScoreMapper，成绩Mybatis映射类  
-model包：  
+`model`包：  
 ----InfoModel，用户信息模型  
 ----InfoReq，用户信息请求模型  
 ----MailModel，邮件模型  
 ----MailReq，邮件请求模型  
 ----ScoreModel，成绩模型  
 ----ScoreReq，成绩请求模型  
-server包：  
+`server`包：  
 ----HttpHandler，消息接收、发送处理类  
 ----HttpServer，由Netty实现的HTTP服务端  
 ----RPCServer，转发消息到对应Service服务处理  
-service包：  
+`service`包：  
 ----InfoService，处理客户端的用户信息RPC请求  
 ----MailService，处理客户端的邮件RPC请求  
 ----ScoreService，处理客户端的成绩RPC请求  
-
 
 ## 书籍推荐
 项目中用到了Netty和Mybatis，而这两者的技术都不是几句话能够简单说明白道明白的，所以推荐两本书籍`《Netty权威指南》`和`《深入浅出Mybatis技术原理与实战》`，看完基本能够了解使用。Netty是别人封装好的网络层开源框架，Mybatis则是别人封装好的数据库开源框架，所以仅仅依赖这两本书是无法深入理解服务端开发的。要想了解网络底层，你需要看`《Unix网络编程》`来学习Unix、Linux下的原始套接字编程，另外辅助以`《Unix环境高级编程》`来学习Unix、Linux下的服务端开发。最后如果能够了解计算机硬件就更好了，这时候就需要`《深入理解计算机系统》`这本书了！以上的书我都看过，我可以负责任地告诉大家，这几本都不好读，也许你读了前几章还是十分感兴趣的，但是估计坚持不了多几章就虚了。服务端不好学，要学习请坚持！
