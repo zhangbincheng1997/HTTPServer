@@ -2,6 +2,7 @@ package com.redhat.login.server;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import com.redhat.login.protocol.ResultCode;
 import com.redhat.login.util.AES;
 import com.redhat.login.core.GameServer;
 import com.redhat.login.util.Coder;
+import com.redhat.login.util.Config;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -41,6 +43,12 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		if (!GameServer.getInstance().getShutdown()) {
 			// 获取请求
 			DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
+
+			// DEBUG
+			for (Entry<String, String> k : req.headers().entries()) {
+				logger.info(k.getKey() + " " + k.getValue());
+			}
+
 			// 处理get请求
 			if (req.getMethod() == HttpMethod.GET) {
 				getHandle(ctx, req);
@@ -71,7 +79,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			// 过滤处理
 			try {
 				// 存在 % 需要URL解码
-				msg = msg.contains("%") ? URLDecoder.decode(msg, "UTF-8") : msg;
+				msg = msg.contains("%") ? URLDecoder.decode(msg, Consts.UTF8) : msg;
 				// 解密
 				msg = new String(Coder.decodeFromBase64(msg));
 
@@ -81,7 +89,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 				// Route处理
 				Router.getInstance().route(msg, ctx);
 			} catch (UnsupportedEncodingException e) {
-				writeJSON(ctx, new HttpMsg(ResultCode.COMMON_ERR, ""));
+				writeJSON(ctx, new HttpMsg(ResultCode.COMMON_ERR, null));
 			}
 		}
 	}
@@ -99,7 +107,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			sentMsg = JSON.toJSONString(msg);
 		}
 		// 加密 true使用AES false使用Base64
-		sentMsg = Consts.USE_AES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
+		sentMsg = Config.UseNet ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
 		writeJSON(ctx, status, Unpooled.copiedBuffer(sentMsg, CharsetUtil.UTF_8));
 	}
 
@@ -114,7 +122,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			sentMsg = JSON.toJSONString(msg);
 		}
 		// 加密 true使用AES false使用Base64
-		sentMsg = Consts.USE_AES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
+		sentMsg = Config.UseNet ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
 		writeJSON(ctx, HttpResponseStatus.OK, Unpooled.copiedBuffer(sentMsg, CharsetUtil.UTF_8));
 	}
 

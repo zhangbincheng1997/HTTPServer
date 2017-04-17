@@ -2,6 +2,7 @@ package com.redhat.gate.server;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import com.redhat.gate.protocol.ResultCode;
 import com.redhat.gate.util.AES;
 import com.redhat.gate.util.Authentication;
 import com.redhat.gate.util.Coder;
+import com.redhat.gate.util.Config;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -49,6 +51,12 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		if (!GameServer.getInstance().getShutdown()) {
 			// 获取请求
 			DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
+
+			// DEBUG
+			for (Entry<String, String> k : req.headers().entries()) {
+				logger.info(k.getKey() + " " + k.getValue());
+			}
+
 			// 处理get请求
 			if (req.getMethod() == HttpMethod.GET) {
 				getHandle(ctx, req);
@@ -75,10 +83,12 @@ public class HttpHandler extends ChannelHandlerAdapter {
 	// POST请求处理
 	private void postHandle(final ChannelHandlerContext ctx, final DefaultFullHttpRequest req) {
 
+		// 获取session字符串
+		String _session = req.headers().get(Consts.SESSION_GET);
 		// 获取session
-		String session = req.headers().get(Consts.SESSION_GET);
+		String session = _session.split(";")[0];
 		// 获取id
-		int id = Integer.parseInt(req.headers().get(Consts.ID_GET));
+		int id = Integer.parseInt(_session.split(";")[1]);
 		// 获取认证结果
 		boolean res = Authentication.getInstancce().checkSession(id, session);
 		// 认证失败
@@ -92,9 +102,9 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		if (msg != null) {
 			try {
 				// 存在 % 需要URL解码
-				msg = msg.contains("%") ? URLDecoder.decode(msg, "UTF-8") : msg;
+				msg = msg.contains("%") ? URLDecoder.decode(msg, Consts.UTF8) : msg;
 				// 解密 true使用AES false使用Base64
-				msg = Consts.USE_AES ? new String(AES.AESDecode(Consts.AES_KEY, msg))
+				msg = Config.UseAES ? new String(AES.AESDecode(Consts.AES_KEY, msg))
 						: new String(Coder.decodeFromBase64(msg));
 
 				// DEBUG
@@ -123,7 +133,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			sentMsg = JSON.toJSONString(msg);
 		}
 		// 加密 true使用AES false使用Base64
-		sentMsg = Consts.USE_AES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
+		sentMsg = Config.UseAES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
 		writeJSON(ctx, status, Unpooled.copiedBuffer(sentMsg, CharsetUtil.UTF_8));
 	}
 
@@ -138,7 +148,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			sentMsg = JSON.toJSONString(msg);
 		}
 		// 加密 true使用AES false使用Base64
-		sentMsg = Consts.USE_AES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
+		sentMsg = Config.UseAES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
 		writeJSON(ctx, HttpResponseStatus.OK, Unpooled.copiedBuffer(sentMsg, CharsetUtil.UTF_8));
 	}
 

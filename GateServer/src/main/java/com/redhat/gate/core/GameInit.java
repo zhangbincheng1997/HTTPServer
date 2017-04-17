@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.redhat.gate.util.Config;
 import com.redhat.gate.core.GameInit;
-import com.redhat.gate.protocol.Consts;
 import com.sun.jdmk.comm.HtmlAdaptorServer;
 
 /**
@@ -24,7 +23,7 @@ public class GameInit {
 	 * Main
 	 */
 	public static void main(String[] args) throws Exception {
-		if (Consts.USE_NET) { // Õ¯“≥∆Ù∂Ø
+		if (Config.UseNet) { // Õ¯“≥∆Ù∂Ø
 			JMXOpen();
 		} else { // ≤‚ ‘
 			GameServer.getInstance().startServer();

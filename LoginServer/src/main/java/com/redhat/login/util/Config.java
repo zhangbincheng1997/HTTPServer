@@ -40,4 +40,9 @@ public class Config {
 	public static boolean RedisTestOnBorrow = Boolean.getBoolean(Property.getData("redisTestOnBorrow")); // 获取连接时候进行检验
 	public static boolean RedisTestOnReturn = Boolean.getBoolean(Property.getData("redisTestOnReturn")); // 归还连接时候进行检验
 	public static boolean RedisTestWhileIdle = Boolean.getBoolean(Property.getData("redisTestWhileIdle")); // 空闲时候进行检验
+
+	// 是否使用网页启动
+	public static boolean UseNet = Boolean.getBoolean(Property.getData("useNet"));
+	// 是否使用AES加密
+	public static boolean UseAES = Boolean.getBoolean(Property.getData("useAES"));
 }

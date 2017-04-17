@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.redhat.login.core.GameServer;
-import com.redhat.login.protocol.Consts;
 import com.redhat.login.util.Config;
 import com.sun.jdmk.comm.HtmlAdaptorServer;
 
@@ -24,7 +23,7 @@ public class GameInit {
 	 * Main
 	 */
 	public static void main(String[] args) throws Exception {
-		if (Consts.USE_NET) { // Õ¯“≥∆Ù∂Ø
+		if (Config.UseNet) { // Õ¯“≥∆Ù∂Ø
 			JMXOpen();
 		} else { // ≤‚ ‘
 			GameServer.getInstance().startServer();

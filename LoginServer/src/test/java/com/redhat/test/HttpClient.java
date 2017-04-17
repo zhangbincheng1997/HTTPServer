@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.redhat.login.model.UserModel;
 import com.redhat.login.model.UserReq;
+import com.redhat.login.protocol.Consts;
 import com.redhat.login.protocol.HttpMsg;
 import com.redhat.login.protocol.RequestCode;
 import com.redhat.login.protocol.ResultCode;
@@ -217,10 +218,12 @@ public class HttpClient {
 		// openConnection
 		http = (HttpURLConnection) url.openConnection();
 		http.setDoOutput(true);
-		// 设置session
-		http.setRequestProperty("cookie", session);
-		// 设置id
-		http.setRequestProperty("id", Integer.toString(id));
+		// session非空则设置
+		if (!session.isEmpty()) {
+			String _session = session + ";" + id;
+			// 设置session
+			http.setRequestProperty(Consts.SESSION_GET, _session);
+		}
 
 		// getOutputStream
 		OutputStreamWriter out = new OutputStreamWriter(http.getOutputStream(), "UTF-8");

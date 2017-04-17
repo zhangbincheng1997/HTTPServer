@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 别名 -->
+	<typeAliases>
+		<typeAlias alias="info" type="com.redhat.rpc.model.InfoModel" />
+		<typeAlias alias="score" type="com.redhat.rpc.model.ScoreModel" />
+		<typeAlias alias="mail" type="com.redhat.rpc.model.MailModel" />
+	</typeAliases>
+
+	<!-- 对事务的管理和连接池的配置 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://127.0.0.1:3306/http?serverTimezone=UTC" />
+				<property name="username" value="root" />
+				<property name="password" value="Zhangbincheng0" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- mapping 文件路径配置 -->
+	<mappers>
+		<mapper resource="com/redhat/rpc/mapper/InfoMapper.xml" />
+		<mapper resource="com/redhat/rpc/mapper/ScoreMapper.xml" />
+		<mapper resource="com/redhat/rpc/mapper/MailMapper.xml" />
+	</mappers>
+</configuration>
