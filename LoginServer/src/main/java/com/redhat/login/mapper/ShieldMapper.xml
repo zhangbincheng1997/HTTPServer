@@ -6,9 +6,11 @@
 <mapper namespace="com.redhat.login.mapper.ShieldMapper">
 	<!-- 是否存在屏蔽词 下面%连接防止注入 -->
 	<select id="hasShield" parameterType="String" resultType="boolean">
-		SELECT COUNT(id)
+		SELECT
+		COUNT(id)
 		FROM tb_shield
-		WHERE word LIKE CONCAT(CONCAT('%', #{username}), '%')
+		WHERE word LIKE CONCAT(CONCAT('%',
+		#{username}), '%')
 		OR #{username} LIKE CONCAT(CONCAT('%', word), '%')
 		LIMIT 1
 	</select>

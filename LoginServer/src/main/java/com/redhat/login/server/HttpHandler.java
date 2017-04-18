@@ -1,8 +1,6 @@
 package com.redhat.login.server;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,16 +36,20 @@ import io.netty.util.CharsetUtil;
 public class HttpHandler extends ChannelHandlerAdapter {
 	private static Logger logger = LoggerFactory.getLogger(HttpHandler.class);
 
+	// DEBUG 测试请求是否全部到达服务端
+	private static int cnt = 0; // 计数
+	private static Object xlock = new Object(); // 加锁
+
 	public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
 		// 服务器已开启
 		if (!GameServer.getInstance().getShutdown()) {
 			// 获取请求
 			DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
 
-			// DEBUG
-			for (Entry<String, String> k : req.headers().entries()) {
-				logger.info(k.getKey() + " " + k.getValue());
-			}
+			/*
+			 * // DEBUG for (Entry<String, String> k : req.headers().entries())
+			 * { logger.info(k.getKey() + " " + k.getValue()); }
+			 */
 
 			// 处理get请求
 			if (req.getMethod() == HttpMethod.GET) {
@@ -60,7 +62,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		}
 		// 服务器已关闭
 		else {
-			writeJSON(ctx, new HttpMsg(ResultCode.SERVER_ERR, ""));
+			writeJSON(ctx, new HttpMsg(ResultCode.SERVER_ERR, null));
 		}
 	}
 
@@ -69,7 +71,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 	// GET请求处理
 	private void getHandle(final ChannelHandlerContext ctx, DefaultFullHttpRequest req) {
 		// String msg = req.content().toString(CharsetUtil.UTF_8);
-		writeJSON(ctx, HttpResponseStatus.NOT_IMPLEMENTED, new HttpMsg(ResultCode.COMMON_ERR, ""));
+		writeJSON(ctx, HttpResponseStatus.NOT_IMPLEMENTED, new HttpMsg(ResultCode.COMMON_ERR, null));
 	}
 
 	// POST请求处理
@@ -84,11 +86,13 @@ public class HttpHandler extends ChannelHandlerAdapter {
 				msg = new String(Coder.decodeFromBase64(msg));
 
 				// DEBUG
-				logger.info(msg);
+				synchronized (xlock) {
+					logger.info("消息 " + ++cnt + " : " + msg);
+				}
 
 				// Route处理
 				Router.getInstance().route(msg, ctx);
-			} catch (UnsupportedEncodingException e) {
+			} catch (Exception e) {
 				writeJSON(ctx, new HttpMsg(ResultCode.COMMON_ERR, null));
 			}
 		}

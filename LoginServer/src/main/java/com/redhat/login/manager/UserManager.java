@@ -18,7 +18,12 @@ public class UserManager {
 
 	public static UserManager getInstance() {
 		if (instance == null) {
-			instance = new UserManager();
+			// Ë«¼ì²éËø»úÖÆ
+			synchronized (UserManager.class) {
+				if (instance == null) {
+					instance = new UserManager();
+				}
+			}
 		}
 		return instance;
 	}

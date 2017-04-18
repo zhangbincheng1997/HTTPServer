@@ -22,7 +22,7 @@ public class SqlSessionFactoryUtil {
 
 	private static SqlSessionFactory initSqlSessionFactory() {
 		InputStream in = SqlSessionFactoryUtil.class.getResourceAsStream("/mybatis-config.xml");
-		;
+
 		synchronized (CLASS_LOCK) {
 			if (sqlSessionFactory == null) {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);

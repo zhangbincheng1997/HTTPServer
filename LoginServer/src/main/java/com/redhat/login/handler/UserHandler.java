@@ -17,7 +17,7 @@ import com.redhat.login.util.Config;
  */
 public class UserHandler {
 
-	public HttpMsg login(HttpMsg msg) {
+	public static HttpMsg login(HttpMsg msg) {
 		// 获取数据
 		String username = JSON.parseObject(msg.getData(), UserReq.class).getUsername();
 		String password = JSON.parseObject(msg.getData(), UserReq.class).getPassword();
@@ -62,7 +62,7 @@ public class UserHandler {
 		return new HttpMsg(ResultCode.SUCCESS, JSON.toJSONString(res));
 	}
 
-	public HttpMsg register(HttpMsg msg) {
+	public static HttpMsg register(HttpMsg msg) {
 		// 获取数据
 		String username = JSON.parseObject(msg.getData(), UserReq.class).getUsername();
 		String password = JSON.parseObject(msg.getData(), UserReq.class).getPassword();

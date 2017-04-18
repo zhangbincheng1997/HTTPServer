@@ -8,20 +8,23 @@
 	<select id="getScore" resultType="score">
 		SELECT *
 		FROM tb_score
-		WHERE userId = #{userId}
+		WHERE
+		userId = #{userId}
 	</select>
-	
+
 	<!-- 设置成绩 -->
 	<insert id="setScore" parameterType="score">
 		INSERT INTO
-		tb_score (userId, subject, score)
+		tb_score (userId,
+		subject, score)
 		VALUES (#{userId}, #{subject}, #{score})
 	</insert>
-	
+
 	<!-- 更新成绩 -->
 	<update id="updateScore" parameterType="score">
 		UPDATE tb_score
-		SET score = #{score}
+		SET score
+		= #{score}
 		WHERE userId = #{userId}
 		AND subject = #{subject}
 	</update>

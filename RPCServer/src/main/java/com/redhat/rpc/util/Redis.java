@@ -17,18 +17,18 @@ public class Redis {
 	private static Logger logger = LoggerFactory.getLogger(Redis.class);
 	private static JedisPool pool;
 
-	private String ip;
-	private int port;
-	private int timeout;
-	private String password;
-
 	private Redis() {
 	}
 
 	public static Redis getInstance() {
-		if (instance == null || pool == null) {
-			instance = new Redis();
-			instance.initData();
+		if (instance == null) {
+			// 双检查锁机制
+			synchronized (Redis.class) {
+				if (instance == null) {
+					instance = new Redis();
+					instance.initData();
+				}
+			}
 		}
 		return instance;
 	}
@@ -42,17 +42,13 @@ public class Redis {
 		config.setTestOnBorrow(Config.RedisTestOnBorrow);
 		config.setTestOnReturn(Config.RedisTestOnReturn);
 		config.setTestWhileIdle(Config.RedisTestWhileIdle);
-		ip = Config.RedisIp;
-		port = Config.RedisPort;
-		timeout = Config.RedisTimeOut;
-		password = Config.RedisPassword;
 
 		// 实例化Redis连接池
-		pool = new JedisPool(config, ip, port, timeout, password);
+		pool = new JedisPool(config, Config.RedisIp, Config.RedisPort, Config.RedisTimeOut, Config.RedisPassword);
 		if (pool.isClosed()) {
 			logger.error("Redis Failed!!!");
 		} else {
-			logger.info("Redis at {}:{}", ip, port);
+			logger.info("Redis at {}:{}", Config.RedisIp, Config.RedisPort);
 		}
 	}
 

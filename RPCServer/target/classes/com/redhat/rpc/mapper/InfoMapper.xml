@@ -6,15 +6,17 @@
 <mapper namespace="com.redhat.rpc.mapper.InfoMapper">
 	<!-- 获取用户信息 -->
 	<select id="getInfo" parameterType="int" resultType="info">
-		SELECT level, info
+		SELECT
+		level, info
 		FROM tb_user
 		WHERE id = #{userId}
 	</select>
-	
+
 	<!-- 更新用户信息 -->
 	<update id="setInfo" parameterType="info">
 		UPDATE tb_user
-		SET level = #{level},
+		SET level =
+		#{level},
 		info = #{info}
 		WHERE id = #{userId}
 	</update>

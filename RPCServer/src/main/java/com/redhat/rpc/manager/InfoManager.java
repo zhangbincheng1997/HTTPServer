@@ -17,7 +17,12 @@ public class InfoManager {
 
 	public static InfoManager getInstance() {
 		if (instance == null) {
-			instance = new InfoManager();
+			// Ë«¼ì²éËø»úÖÆ
+			synchronized (InfoManager.class) {
+				if (instance == null) {
+					instance = new InfoManager();
+				}
+			}
 		}
 		return instance;
 	}

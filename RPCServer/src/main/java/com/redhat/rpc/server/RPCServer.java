@@ -23,8 +23,13 @@ public class RPCServer {
 
 	public static RPCServer getInstance() {
 		if (instance == null) {
-			instance = new RPCServer();
-			instance.initData();
+			// Ë«¼ì²éËø»úÖÆ
+			synchronized (RPCServer.class) {
+				if (instance == null) {
+					instance = new RPCServer();
+					instance.initData();
+				}
+			}
 		}
 		return instance;
 	}

@@ -1,8 +1,6 @@
 package com.redhat.gate.server;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,10 +50,10 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			// 获取请求
 			DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
 
-			// DEBUG
-			for (Entry<String, String> k : req.headers().entries()) {
-				logger.info(k.getKey() + " " + k.getValue());
-			}
+			/*
+			 * // DEBUG for (Entry<String, String> k : req.headers().entries())
+			 * { logger.info(k.getKey() + " " + k.getValue()); }
+			 */
 
 			// 处理get请求
 			if (req.getMethod() == HttpMethod.GET) {
@@ -112,9 +110,9 @@ public class HttpHandler extends ChannelHandlerAdapter {
 					logger.info("消息 " + ++cnt + " : " + msg);
 				}
 
-				// Route处理
-				Router.getInstance().route(msg, ctx);
-			} catch (UnsupportedEncodingException e) {
+				// Handle处理
+				RPCClient.getInstance().handle(msg, ctx);
+			} catch (Exception e) {
 				writeJSON(ctx, new HttpMsg(ResultCode.COMMON_ERR, null));
 			}
 		}

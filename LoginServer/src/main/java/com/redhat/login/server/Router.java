@@ -21,21 +21,19 @@ public class Router {
 	private static Router instance = null;
 	private Logger logger = LoggerFactory.getLogger(Router.class);
 
-	private UserHandler userHandler = null;
-
 	private Router() {
 	}
 
 	public static Router getInstance() {
 		if (instance == null) {
-			instance = new Router();
-			instance.initHandler();
+			// 双检查锁机制
+			synchronized (Router.class) {
+				if (instance == null) {
+					instance = new Router();
+				}
+			}
 		}
 		return instance;
-	}
-
-	private void initHandler() {
-		userHandler = new UserHandler();
 	}
 
 	/**
@@ -48,30 +46,30 @@ public class Router {
 			httpMsg = JSON.parseObject(msg, HttpMsg.class);
 		} catch (Exception e) {
 			logger.error("格式错误");
-			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.PROTO_ERR, ""));
+			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.PROTO_ERR, null));
 			return;
 		}
 		// 消息处理
 		switch (httpMsg.getCode()) {
 		case RequestCode.TEST:
 			logger.info("Router TEST");
-			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.SUCCESS, ""));
+			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.SUCCESS, null));
 			break;
 		case RequestCode.C2S_Login: {
 			logger.info("Router C2S_Login");
-			HttpMsg res = userHandler.login(httpMsg);
+			HttpMsg res = UserHandler.login(httpMsg);
 			HttpHandler.writeJSON(ctx, res);
 			break;
 		}
 		case RequestCode.C2S_Register: {
 			logger.info("Router C2S_Register");
-			HttpMsg res = userHandler.register(httpMsg);
+			HttpMsg res = UserHandler.register(httpMsg);
 			HttpHandler.writeJSON(ctx, res);
 			break;
 		}
 		default:
 			logger.error("无协议号");
-			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.PROTO_ERR, ""));
+			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.PROTO_ERR, null));
 			break;
 		}
 	}

@@ -19,7 +19,12 @@ public class MailManager {
 
 	public static MailManager getInstance() {
 		if (instance == null) {
-			instance = new MailManager();
+			// Ë«¼ì²éËø»úÖÆ
+			synchronized (MailManager.class) {
+				if (instance == null) {
+					instance = new MailManager();
+				}
+			}
 		}
 		return instance;
 	}

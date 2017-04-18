@@ -16,7 +16,12 @@ public class ShieldManager {
 
 	public static ShieldManager getInstance() {
 		if (instance == null) {
-			instance = new ShieldManager();
+			// Ë«¼ì²éËø»úÖÆ
+			synchronized (ShieldManager.class) {
+				if (instance == null) {
+					instance = new ShieldManager();
+				}
+			}
 		}
 		return instance;
 	}

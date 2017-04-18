@@ -7,17 +7,17 @@ public class UserModel {
 
 	private int id; // 用户id
 	private String session; // 用户session
-	private int gatePort; // gate port
 	private String gateIp; // gate ip
-	
+	private int gatePort; // gate port
+
 	public UserModel() {
 	}
-	
+
 	public UserModel(int id, String session, int gatePort, String gateIp) {
 		this.id = id;
 		this.session = session;
-		this.gatePort = gatePort;
 		this.gateIp = gateIp;
+		this.gatePort = gatePort;
 	}
 
 	public int getId() {
@@ -36,19 +36,19 @@ public class UserModel {
 		this.session = session;
 	}
 
-	public int getGatePort() {
-		return gatePort;
-	}
-
-	public void setGatePort(int gatePort) {
-		this.gatePort = gatePort;
-	}
-
 	public String getGateIp() {
 		return gateIp;
 	}
 
 	public void setGateIp(String gateIp) {
 		this.gateIp = gateIp;
+	}
+
+	public int getGatePort() {
+		return gatePort;
+	}
+
+	public void setGatePort(int gatePort) {
+		this.gatePort = gatePort;
 	}
 }

@@ -25,8 +25,8 @@ import com.redhat.login.util.Coder;
 public class HttpClient {
 	private static int id = 0;
 	private static String session = "";
-	private static int port = 9901;
 	private static String ip = "127.0.0.1";
+	private static int port = 9901;
 
 	private static URL url;
 	private static HttpURLConnection http;
@@ -50,15 +50,14 @@ public class HttpClient {
 				System.out.print("ÃÜÂë : ");
 				String password = sc.nextLine();
 				// login
-				UserReq user = new UserReq(username, password);
+				UserReq user = new UserReq(username, Coder.encodeToMD5(password));
 				// msg
 				HttpMsg msg = new HttpMsg(RequestCode.C2S_Login, JSON.toJSONString(user));
 				// to JSON
 				String str = JSON.toJSONString(msg);
 				// to Base64
 				String data = Coder.encodeToBase64(str);
-				// System.out.println(str + " == " + data);
-				// µÇÂ½
+				// µÇÂ¼
 				String res = task(data);
 				login(res);
 			} else if (option.equals("register")) {
@@ -67,14 +66,13 @@ public class HttpClient {
 				System.out.print("ÃÜÂë : ");
 				String password = sc.nextLine();
 				// register
-				UserReq user = new UserReq(username, password);
+				UserReq user = new UserReq(username, Coder.encodeToMD5(password));
 				HttpMsg msg = new HttpMsg(RequestCode.C2S_Register, JSON.toJSONString(user));
 				// to JSON
 				String str = JSON.toJSONString(msg);
 				// to Base64
 				String data = Coder.encodeToBase64(str);
-				System.out.println(str + " == " + data);
-				// µÇÂ½
+				// ×¢²á
 				String res = task(data);
 				register(res);
 			} else if (option.equals("list")) {
@@ -219,7 +217,7 @@ public class HttpClient {
 		http = (HttpURLConnection) url.openConnection();
 		http.setDoOutput(true);
 		// session·Ç¿ÕÔòÉèÖÃ
-		if (!session.isEmpty()) {
+		if (session != null && !session.isEmpty()) {
 			String _session = session + ";" + id;
 			// ÉèÖÃsession
 			http.setRequestProperty(Consts.SESSION_GET, _session);
@@ -247,7 +245,7 @@ public class HttpClient {
 		if (http != null) {
 			http.disconnect();// ¹Ø±ÕÁ¬½Ó
 		}
-		System.out.println(res);
+
 		return new String(Coder.decodeFromBase64(res.toString()));
 	}
 
@@ -266,9 +264,10 @@ public class HttpClient {
 
 			System.out.println("id == " + id);
 			System.out.println("session == " + session);
-			System.out.println("gatePort == " + port);
 			System.out.println("gateIp == " + ip);
+			System.out.println("gatePort == " + port);
 
+			// µÇÂ¼³É¹¦
 			isOk = true;
 		} else {
 			System.out.println("µÇÂ¼Ê§°Ü : " + res.getCode());
@@ -317,7 +316,7 @@ public class HttpClient {
 	//////////
 
 	private static void getScore(String msg) {
-		System.out.println("getInfo ==> " + msg);
+		System.out.println("getScore ==> " + msg);
 		HttpMsg res = JSON.parseObject(msg, HttpMsg.class);
 
 		if (res.getCode() == ResultCode.SUCCESS) {

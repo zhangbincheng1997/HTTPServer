@@ -19,7 +19,12 @@ public class ScoreManager {
 
 	public static ScoreManager getInstance() {
 		if (instance == null) {
-			instance = new ScoreManager();
+			// Ë«¼ì²éËø»úÖÆ
+			synchronized (ScoreManager.class) {
+				if (instance == null) {
+					instance = new ScoreManager();
+				}
+			}
 		}
 		return instance;
 	}

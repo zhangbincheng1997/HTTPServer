@@ -1,0 +1,336 @@
+2017-04-17 00:28:05,838 - ================开启服务器================
+2017-04-17 00:28:09,592 - 端口绑定: 9901
+2017-04-17 00:28:09,592 - ================服务器开启================
+2017-04-17 01:49:43,584 - 呵?
+2017-04-17 01:49:43,944 - 格式错误
+2017-04-17 01:50:41,207 - 
+2017-04-17 01:50:41,208 - 
+2017-04-17 01:53:42,220 - 
+2017-04-17 01:53:42,220 - 
+2017-04-17 01:53:54,449 - 
+2017-04-17 01:53:54,450 - 
+2017-04-17 01:54:16,411 - 
+2017-04-17 01:54:16,412 - 
+2017-04-17 18:41:35,874 - ================开启服务器================
+2017-04-17 18:41:37,946 - 端口绑定: 9901
+2017-04-17 18:41:37,946 - ================服务器开启================
+2017-04-17 18:41:54,525 - head == io.netty.handler.codec.http.DefaultHttpHeaders@1c633f15
+2017-04-17 18:41:54,526 - content == eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInBhc3N3b3JkXCI6XCI1MjBcIixcInVzZXJuYW1lXCI6XCJtYW9tYW9cIn0ifQ==
+2017-04-17 18:41:54,534 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 18:41:54,632 - Router C2S_Login
+2017-04-17 18:47:15,242 - ================开启服务器================
+2017-04-17 18:47:16,599 - 端口绑定: 9901
+2017-04-17 18:47:16,599 - ================服务器开启================
+2017-04-17 18:47:23,914 - head == [cookie=, id=0, User-Agent=Java/1.8.0_72, Host=127.0.0.1:9901, Accept=text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2, Connection=keep-alive, Content-type=application/x-www-form-urlencoded, Content-Length=96]
+2017-04-17 18:47:23,915 - key == cookievalue == 
+2017-04-17 18:47:23,915 - key == idvalue == 0
+2017-04-17 18:47:23,915 - key == User-Agentvalue == Java/1.8.0_72
+2017-04-17 18:47:23,915 - key == Hostvalue == 127.0.0.1:9901
+2017-04-17 18:47:23,915 - key == Acceptvalue == text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 18:47:23,915 - key == Connectionvalue == keep-alive
+2017-04-17 18:47:23,915 - key == Content-typevalue == application/x-www-form-urlencoded
+2017-04-17 18:47:23,915 - key == Content-Lengthvalue == 96
+2017-04-17 18:47:23,916 - content == eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInBhc3N3b3JkXCI6XCI1MjBcIixcInVzZXJuYW1lXCI6XCJtYW9tYW9cIn0ifQ==
+2017-04-17 18:47:23,924 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 18:47:24,021 - Router C2S_Login
+2017-04-17 18:49:06,427 - ================开启服务器================
+2017-04-17 18:49:08,164 - 端口绑定: 9901
+2017-04-17 18:49:08,164 - ================服务器开启================
+2017-04-17 18:49:31,798 - cookie 
+2017-04-17 18:49:31,799 - id 0
+2017-04-17 18:49:31,799 - User-Agent Java/1.8.0_72
+2017-04-17 18:49:31,799 - Host 127.0.0.1:9901
+2017-04-17 18:49:31,799 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 18:49:31,799 - Connection keep-alive
+2017-04-17 18:49:31,799 - Content-type application/x-www-form-urlencoded
+2017-04-17 18:49:31,799 - Content-Length 96
+2017-04-17 18:49:31,810 - {"code":10002,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 18:49:31,917 - Router C2S_Register
+2017-04-17 18:50:44,785 - cookie 
+2017-04-17 18:50:44,786 - id 0
+2017-04-17 18:50:44,786 - User-Agent Java/1.8.0_72
+2017-04-17 18:50:44,786 - Host 127.0.0.1:9901
+2017-04-17 18:50:44,786 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 18:50:44,786 - Connection keep-alive
+2017-04-17 18:50:44,786 - Content-type application/x-www-form-urlencoded
+2017-04-17 18:50:44,786 - Content-Length 96
+2017-04-17 18:50:44,786 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 18:50:44,787 - Router C2S_Login
+2017-04-17 18:50:45,137 - Redis at 127.0.0.1:6379
+2017-04-17 19:07:22,782 - ================开启服务器================
+2017-04-17 19:07:25,021 - 端口绑定: 9901
+2017-04-17 19:07:25,022 - ================服务器开启================
+2017-04-17 19:07:32,210 - 
+2017-04-17 19:07:32,210 - cookie 
+2017-04-17 19:07:32,210 - id 0
+2017-04-17 19:07:32,210 - User-Agent Java/1.8.0_72
+2017-04-17 19:07:32,210 - Host 127.0.0.1:9901
+2017-04-17 19:07:32,210 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 19:07:32,210 - Connection keep-alive
+2017-04-17 19:07:32,211 - Content-type application/x-www-form-urlencoded
+2017-04-17 19:07:32,211 - Content-Length 96
+2017-04-17 19:07:32,218 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 19:07:32,308 - Router C2S_Login
+2017-04-17 19:07:32,932 - Redis at 127.0.0.1:6379
+2017-04-17 19:09:23,686 - ================开启服务器================
+2017-04-17 19:09:26,158 - 端口绑定: 9901
+2017-04-17 19:09:26,158 - ================服务器开启================
+2017-04-17 19:09:37,196 - 
+2017-04-17 19:09:37,196 - Cookie 
+2017-04-17 19:09:37,196 - id 0
+2017-04-17 19:09:37,197 - User-Agent Java/1.8.0_72
+2017-04-17 19:09:37,197 - Host 127.0.0.1:9901
+2017-04-17 19:09:37,197 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 19:09:37,197 - Connection keep-alive
+2017-04-17 19:09:37,197 - Content-type application/x-www-form-urlencoded
+2017-04-17 19:09:37,197 - Content-Length 96
+2017-04-17 19:09:37,203 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 19:09:37,285 - Router C2S_Login
+2017-04-17 19:09:37,860 - Redis at 127.0.0.1:6379
+2017-04-17 19:10:30,826 - 0
+2017-04-17 19:10:30,826 - Cookie 0
+2017-04-17 19:10:30,826 - id 0
+2017-04-17 19:10:30,826 - User-Agent Java/1.8.0_72
+2017-04-17 19:10:30,827 - Host 127.0.0.1:9901
+2017-04-17 19:10:30,827 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 19:10:30,827 - Connection keep-alive
+2017-04-17 19:10:30,827 - Content-type application/x-www-form-urlencoded
+2017-04-17 19:10:30,827 - Content-Length 96
+2017-04-17 19:10:30,827 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 19:10:30,827 - Router C2S_Login
+2017-04-17 19:18:49,025 - ================开启服务器================
+2017-04-17 19:18:51,411 - ================服务器开启================
+2017-04-17 19:20:05,058 - ================开启服务器================
+2017-04-17 19:20:07,464 - 端口绑定: 9901
+2017-04-17 19:20:07,464 - ================服务器开启================
+2017-04-17 19:20:14,388 - 
+2017-04-17 19:20:14,389 - User-Agent Java/1.8.0_72
+2017-04-17 19:20:14,389 - Host 127.0.0.1:9901
+2017-04-17 19:20:14,389 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 19:20:14,389 - Connection keep-alive
+2017-04-17 19:20:14,389 - Content-type application/x-www-form-urlencoded
+2017-04-17 19:20:14,389 - Content-Length 96
+2017-04-17 19:20:14,397 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 19:20:14,504 - Router C2S_Login
+2017-04-17 19:20:15,195 - Redis at 127.0.0.1:6379
+2017-04-17 19:34:03,397 - ================开启服务器================
+2017-04-17 19:34:05,606 - 端口绑定: 9901
+2017-04-17 19:34:05,607 - ================服务器开启================
+2017-04-17 19:34:54,383 - User-Agent Java/1.8.0_72
+2017-04-17 19:34:54,383 - Host 127.0.0.1:9901
+2017-04-17 19:34:54,383 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 19:34:54,383 - Connection keep-alive
+2017-04-17 19:34:54,383 - Content-type application/x-www-form-urlencoded
+2017-04-17 19:34:54,383 - Content-Length 96
+2017-04-17 19:34:54,383 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 19:34:54,477 - Router C2S_Login
+2017-04-17 19:34:55,104 - Redis at 127.0.0.1:6379
+2017-04-17 19:56:21,079 - ================开启服务器================
+2017-04-17 19:56:24,792 - 端口绑定: 9901
+2017-04-17 19:56:24,792 - ================服务器开启================
+2017-04-17 20:05:15,955 - Host 127.0.0.1:9901
+2017-04-17 20:05:15,955 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:05:15,955 - Accept */*
+2017-04-17 20:05:15,955 - Accept-Encoding identity
+2017-04-17 20:05:15,956 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:05:15,956 - Content-Length 101
+2017-04-17 20:05:15,967 - 
+2017-04-17 20:05:16,115 - 
+2017-04-17 20:05:44,397 - Host 127.0.0.1:9901
+2017-04-17 20:05:44,397 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:05:44,398 - Accept */*
+2017-04-17 20:05:44,398 - Accept-Encoding identity
+2017-04-17 20:05:44,398 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:05:44,398 - Content-Length 101
+2017-04-17 20:05:44,398 - 
+2017-04-17 20:05:44,399 - 
+2017-04-17 20:05:52,307 - Host 127.0.0.1:9901
+2017-04-17 20:05:52,307 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:05:52,307 - Accept */*
+2017-04-17 20:05:52,307 - Accept-Encoding identity
+2017-04-17 20:05:52,307 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:05:52,307 - Content-Length 103
+2017-04-17 20:05:52,308 - 
+2017-04-17 20:05:52,308 - 
+2017-04-17 20:08:57,953 - Host 127.0.0.1:9901
+2017-04-17 20:08:57,954 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:08:57,954 - Accept */*
+2017-04-17 20:08:57,954 - Accept-Encoding identity
+2017-04-17 20:08:57,954 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:08:57,954 - Content-Length 108
+2017-04-17 20:08:57,954 - 
+夗z{
+2017-04-17 20:08:57,955 - 格式错误
+2017-04-17 20:09:17,328 - User-Agent Java/1.8.0_72
+2017-04-17 20:09:17,328 - Host 127.0.0.1:9901
+2017-04-17 20:09:17,328 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 20:09:17,328 - Connection keep-alive
+2017-04-17 20:09:17,328 - Content-type application/x-www-form-urlencoded
+2017-04-17 20:09:17,328 - Content-Length 96
+2017-04-17 20:09:17,328 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 20:09:17,329 - Router C2S_Login
+2017-04-17 20:09:18,077 - Redis at 127.0.0.1:6379
+2017-04-17 20:10:10,149 - Host 127.0.0.1:9901
+2017-04-17 20:10:10,149 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:10:10,149 - Accept */*
+2017-04-17 20:10:10,149 - Accept-Encoding identity
+2017-04-17 20:10:10,150 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:10:10,150 - Content-Length 108
+2017-04-17 20:10:10,150 - 
+夗z{
+2017-04-17 20:10:10,150 - 格式错误
+2017-04-17 20:10:24,860 - Host 127.0.0.1:9901
+2017-04-17 20:10:24,861 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:10:24,861 - Accept */*
+2017-04-17 20:10:24,861 - Accept-Encoding identity
+2017-04-17 20:10:24,861 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:10:24,861 - Content-Length 108
+2017-04-17 20:10:24,861 - 
+夗z{
+2017-04-17 20:10:24,861 - 格式错误
+2017-04-17 20:11:05,601 - ================开启服务器================
+2017-04-17 20:11:07,287 - 端口绑定: 9901
+2017-04-17 20:11:07,288 - ================服务器开启================
+2017-04-17 20:11:37,204 - Host 127.0.0.1:9901
+2017-04-17 20:11:37,204 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:11:37,204 - Accept */*
+2017-04-17 20:11:37,204 - Accept-Encoding identity
+2017-04-17 20:11:37,205 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:11:37,205 - Content-Length 108
+2017-04-17 20:11:37,205 - Content=eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ%3d%3d
+2017-04-17 20:11:37,220 - 
+夗z{
+2017-04-17 20:11:37,349 - 格式错误
+2017-04-17 20:11:56,432 - User-Agent Java/1.8.0_72
+2017-04-17 20:11:56,432 - Host 127.0.0.1:9901
+2017-04-17 20:11:56,432 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 20:11:56,432 - Connection keep-alive
+2017-04-17 20:11:56,432 - Content-type application/x-www-form-urlencoded
+2017-04-17 20:11:56,432 - Content-Length 96
+2017-04-17 20:11:56,432 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInBhc3N3b3JkXCI6XCI1MjBcIixcInVzZXJuYW1lXCI6XCJtYW9tYW9cIn0ifQ==
+2017-04-17 20:11:56,433 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 20:11:56,433 - Router C2S_Login
+2017-04-17 20:11:57,261 - Redis at 127.0.0.1:6379
+2017-04-17 20:13:54,558 - Host 127.0.0.1:9901
+2017-04-17 20:13:54,558 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:13:54,558 - Accept */*
+2017-04-17 20:13:54,558 - Accept-Encoding identity
+2017-04-17 20:13:54,558 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:13:54,559 - Content-Length 101
+2017-04-17 20:13:54,559 - =eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ%3d%3d
+2017-04-17 20:13:54,559 - 
+2017-04-17 20:13:54,560 - 
+2017-04-17 20:20:03,359 - User-Agent Java/1.8.0_72
+2017-04-17 20:20:03,359 - Host 127.0.0.1:9901
+2017-04-17 20:20:03,359 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 20:20:03,359 - Connection keep-alive
+2017-04-17 20:20:03,359 - Content-type application/x-www-form-urlencoded
+2017-04-17 20:20:03,359 - Content-Length 96
+2017-04-17 20:20:03,360 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInBhc3N3b3JkXCI6XCI1MjBcIixcInVzZXJuYW1lXCI6XCJtYW9tYW9cIn0ifQ==
+2017-04-17 20:20:03,360 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 20:20:03,360 - Router C2S_Login
+2017-04-17 20:26:50,271 - Host 127.0.0.1:9901
+2017-04-17 20:26:50,272 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:26:50,272 - Accept */*
+2017-04-17 20:26:50,272 - Accept-Encoding identity
+2017-04-17 20:26:50,272 - Content-Type multipart/form-data; boundary="x9ucdiloaGPR4Yb1B2unmEQFGlNmm0S174iVRing"
+2017-04-17 20:26:50,272 - Content-Length 298
+2017-04-17 20:26:50,272 - 
+--x9ucdiloaGPR4Yb1B2unmEQFGlNmm0S174iVRing
+Content-Type: application/octet-stream
+Content-disposition: form-data; name="post"; filename="post.dat"
+
+eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ==
+--x9ucdiloaGPR4Yb1B2unmEQFGlNmm0S174iVRing--
+
+2017-04-17 20:26:50,273 - }骨b枂?=oPv簓凘Q?6i碖^鴫Tb? 拽蜂颔姗渏亘燏惦~糙辥`拽风b矚,娯?+涚Z旦跈
+2017-04-17 20:26:50,274 - 格式错误
+2017-04-17 20:27:41,082 - Host 127.0.0.1:9901
+2017-04-17 20:27:41,082 - Connection Keep-Alive
+2017-04-17 20:27:41,082 - User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0
+2017-04-17 20:27:41,082 - Accept-Encoding gzip, deflate, sdch
+2017-04-17 20:27:41,082 - Content-Length 0
+2017-04-17 20:27:41,082 - 
+2017-04-17 20:27:41,249 - Host 127.0.0.1:9901
+2017-04-17 20:27:41,249 - Connection keep-alive
+2017-04-17 20:27:41,249 - Accept text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2017-04-17 20:27:41,249 - Upgrade-Insecure-Requests 1
+2017-04-17 20:27:41,249 - User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0
+2017-04-17 20:27:41,249 - Accept-Encoding gzip, deflate, sdch
+2017-04-17 20:27:41,250 - Accept-Language zh-CN,zh;q=0.8
+2017-04-17 20:27:41,250 - Content-Length 0
+2017-04-17 20:27:41,250 - 
+2017-04-17 20:41:44,863 - Host 127.0.0.1:9901
+2017-04-17 20:41:44,863 - Connection Keep-Alive
+2017-04-17 20:41:44,863 - User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0
+2017-04-17 20:41:44,863 - Accept-Encoding gzip, deflate, sdch
+2017-04-17 20:41:44,863 - Content-Length 0
+2017-04-17 20:41:44,863 - 
+2017-04-17 20:41:47,356 - Host 127.0.0.1:9901
+2017-04-17 20:41:47,356 - Connection keep-alive
+2017-04-17 20:41:47,356 - Accept text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2017-04-17 20:41:47,356 - Upgrade-Insecure-Requests 1
+2017-04-17 20:41:47,356 - User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0
+2017-04-17 20:41:47,356 - Accept-Encoding gzip, deflate, sdch
+2017-04-17 20:41:47,356 - Accept-Language zh-CN,zh;q=0.8
+2017-04-17 20:41:47,357 - Content-Length 0
+2017-04-17 20:41:47,357 - 
+2017-04-17 20:41:54,447 - unsupported message type: DefaultFullHttpResponse
+2017-04-17 20:41:54,451 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:41:54,451 - Expect 100-continue
+2017-04-17 20:41:54,451 - Connection keep-alive
+2017-04-17 20:41:54,451 - Host 127.0.0.1:9901
+2017-04-17 20:41:54,451 - Content-Length 96
+2017-04-17 20:41:54,451 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ==
+2017-04-17 20:41:54,451 - {"code":10001,"data":"{\"username\":\"maomao\",\"password\":\"520\"}"}
+2017-04-17 20:41:54,451 - Router C2S_Login
+2017-04-17 20:42:15,567 - unsupported message type: DefaultFullHttpResponse
+2017-04-17 20:42:15,568 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:42:15,568 - Expect 100-continue
+2017-04-17 20:42:15,568 - Host 127.0.0.1:9901
+2017-04-17 20:42:15,568 - Content-Length 96
+2017-04-17 20:42:15,568 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ==
+2017-04-17 20:42:15,568 - {"code":10001,"data":"{\"username\":\"maomao\",\"password\":\"520\"}"}
+2017-04-17 20:42:15,568 - Router C2S_Login
+2017-04-17 20:43:45,419 - User-Agent Java/1.8.0_72
+2017-04-17 20:43:45,419 - Host 127.0.0.1:9901
+2017-04-17 20:43:45,420 - Accept text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+2017-04-17 20:43:45,420 - Connection keep-alive
+2017-04-17 20:43:45,420 - Content-type application/x-www-form-urlencoded
+2017-04-17 20:43:45,420 - Content-Length 96
+2017-04-17 20:43:45,420 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInBhc3N3b3JkXCI6XCI1MjBcIixcInVzZXJuYW1lXCI6XCJtYW9tYW9cIn0ifQ==
+2017-04-17 20:43:45,420 - {"code":10001,"data":"{\"password\":\"520\",\"username\":\"maomao\"}"}
+2017-04-17 20:43:45,420 - Router C2S_Login
+2017-04-17 20:50:04,204 - Host 127.0.0.1:9901
+2017-04-17 20:50:04,205 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:50:04,205 - Accept */*
+2017-04-17 20:50:04,205 - Accept-Encoding identity
+2017-04-17 20:50:04,205 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:50:04,205 - X-Unity-Version 5.5.2f1
+2017-04-17 20:50:04,205 - Content-Length 101
+2017-04-17 20:50:04,205 - =eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ%3d%3d
+2017-04-17 20:50:04,205 - 
+2017-04-17 20:50:04,206 - 
+2017-04-17 20:51:37,530 - 远程主机强迫关闭了一个现有的连接。
+2017-04-17 20:51:47,292 - unsupported message type: DefaultFullHttpResponse
+2017-04-17 20:51:47,297 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:51:47,297 - Accept */*
+2017-04-17 20:51:47,297 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:51:47,297 - Expect 100-continue
+2017-04-17 20:51:47,297 - Connection keep-alive
+2017-04-17 20:51:47,297 - Host 127.0.0.1:9901
+2017-04-17 20:51:47,297 - Content-Length 96
+2017-04-17 20:51:47,297 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ==
+2017-04-17 20:51:47,297 - {"code":10001,"data":"{\"username\":\"maomao\",\"password\":\"520\"}"}
+2017-04-17 20:51:47,297 - Router C2S_Login
+2017-04-17 20:53:19,784 - unsupported message type: DefaultFullHttpResponse
+2017-04-17 20:53:19,788 - User-Agent UnityPlayer/5.5.2f1 (http://unity3d.com)
+2017-04-17 20:53:19,789 - Accept */*
+2017-04-17 20:53:19,789 - Content-Type application/x-www-form-urlencoded
+2017-04-17 20:53:19,789 - Expect 100-continue
+2017-04-17 20:53:19,789 - Connection keep-alive
+2017-04-17 20:53:19,789 - Host 127.0.0.1:9901
+2017-04-17 20:53:19,789 - Content-Length 96
+2017-04-17 20:53:19,789 - eyJjb2RlIjoxMDAwMSwiZGF0YSI6IntcInVzZXJuYW1lXCI6XCJtYW9tYW9cIixcInBhc3N3b3JkXCI6XCI1MjBcIn0ifQ==
+2017-04-17 20:53:19,789 - {"code":10001,"data":"{\"username\":\"maomao\",\"password\":\"520\"}"}
+2017-04-17 20:53:19,789 - Router C2S_Login
