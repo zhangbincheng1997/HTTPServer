@@ -108,9 +108,9 @@ public String data; // 数据
 
 ## 服务端解释
 保证启动Redis服务！！！  
-启动LoginServer下的GameInit  
-启动GateServer下的GameInit  
-启动RPCServer下的GameInit  
+启动LoginServer下的GameInit.java  
+启动GateServer下的GameInit.java  
+启动RPCServer下的GameInit.java  
 0、`LoginServer`、`GateServer`、`RPCServer`工程共同文件：  
 `core`包：  
 ----GameInit，开启、关闭服务器的主函数入口  
@@ -182,7 +182,8 @@ public String data; // 数据
 ## 书籍推荐
 项目中用到了Netty和Mybatis，而这两者的技术都不是几句话能够说清楚道明白的，所以推荐两本书籍`《Netty权威指南》`和`《深入浅出Mybatis技术原理与实战》`，看完基本能够了解使用。Netty是别人封装好的网络层开源框架，Mybatis则是别人封装好的数据库开源框架，所以仅仅依赖这两本书是无法深入理解服务端开发的。要想了解网络底层，你需要看`《Unix网络编程》`来学习Unix、Linux下的原始套接字编程，另外辅助以`《Unix环境高级编程》`来学习Unix、Linux下的服务端开发。最后如果能够了解计算机硬件就更好了，这时候就需要`《深入理解计算机系统》`这本书了！以上的书我都看过，我可以负责任地告诉大家，这几本都不好读，也许你读了前几章还是十分感兴趣的，但是估计坚持不了多几章就虚了。服务端不好学，要学习请坚持！
 
-  [1]: https://github.com/littleredhat1997/HTTPServer/Img/1.png
-  [2]: https://github.com/littleredhat1997/HTTPServer/Img/2.png
-  [3]: https://github.com/littleredhat1997/HTTPServer/Img/3.png
-  [4]: https://github.com/littleredhat1997/HTTPServer/Img/4.png
+  [1]: https://github.com/littleredhat1997/HTTPServer/blob/master/Img/1.png
+  [2]: https://github.com/littleredhat1997/HTTPServer/blob/master/Img/2.png
+  [3]: https://github.com/littleredhat1997/HTTPServer/blob/master/Img/3.png
+  [4]: https://github.com/littleredhat1997/HTTPServer/blob/master/Img/4.png
+  
