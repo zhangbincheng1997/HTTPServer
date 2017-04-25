@@ -135,7 +135,7 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 
 2、`GateServer`工程：  
 `server`包：  
-----Filter，消息解析、token验证类  
+----Filter，消息解析、口令验证类  
 ----HttpHandler，消息接收、发送处理类  
 ----HttpServer，由Netty实现的HTTP服务端  
 ----RPCClient，Gate服务端与RPC服务端交互的管理类  
