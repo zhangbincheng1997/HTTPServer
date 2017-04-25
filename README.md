@@ -79,8 +79,8 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 ```
 
 ## 消息组成
-`Request(请求class) = id(标识long) + token(口令string) + requestCode(请求码short) + subCode(子请求码string) + data(数据string)`
-`Response(响应class) = responseCode(响应码) + data(数据string)`
+`Request(请求class) = id(标识long) + token(口令string) + requestCode(请求码short) + subCode(子请求码string) + data(数据string)`  
+`Response(响应class) = responseCode(响应码) + data(数据string)`  
 1、data是JSON字符串，通过JSON.toJSONString序列化特定的类。  
 2、Request和Response同样通过JSON.toJSONString序列化为JSON字符串。  
 3、最后Request和Response通过Base64编码解码(默认)或者AES加密解密(net.properties文件下的USE\_AES参数)，防止抓包消息内容。  
@@ -108,8 +108,8 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 ----SubCode，子请求码  
 `util`包：  
 ----AES，高级对称加密算法  
-----Authentication，口令生成、口令认证  
-----Coder，Base64加解密、MD5、SHA1加密  
+----Authentication，口令生成、口令认证  
+----Coder，Base64加解密、MD5、SHA1加密   
 ----Config，初始配置  
 ----Property，读取配置  
 ----Redis，Redis工具类  
