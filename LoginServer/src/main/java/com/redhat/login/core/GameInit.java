@@ -7,6 +7,7 @@ import javax.management.ObjectName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.redhat.login.util.Redis;
 import com.redhat.login.core.GameServer;
 import com.redhat.login.util.Config;
 import com.sun.jdmk.comm.HtmlAdaptorServer;
@@ -23,7 +24,10 @@ public class GameInit {
 	 * Main
 	 */
 	public static void main(String[] args) throws Exception {
-		if (Config.UseNet) { // Õ¯“≥∆Ù∂Ø
+		// ∆Ù∂ØRedis
+		Redis.getInstance().initData();
+
+		if (Config.USE_NET) { // Õ¯“≥∆Ù∂Ø
 			JMXOpen();
 		} else { // ≤‚ ‘
 			GameServer.getInstance().startServer();
@@ -48,6 +52,6 @@ public class GameInit {
 		// ¥¥Ω®adapter
 		adapter.start();
 
-		logger.info("Init at {}:{}", Config.LoginIp, Config.LoginNetPort);
+		logger.info("GameInit at {}:{}", Config.LoginIp, Config.LoginNetPort);
 	}
 }

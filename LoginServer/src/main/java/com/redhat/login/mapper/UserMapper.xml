@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.redhat.login.mapper.UserMapper">
-	<!-- 获取用户Id -->
-	<select id="getId" parameterType="string" resultType="int">
+	<!-- 获取用户id -->
+	<select id="getId" parameterType="string" resultType="long">
 		SELECT
 		IFNULL(max(id), -1) AS id
 		FROM tb_user
@@ -13,7 +13,7 @@
 	</select>
 
 	<!-- 获取用户密码 -->
-	<select id="getPassword" parameterType="int" resultType="string">
+	<select id="getPassword" parameterType="long" resultType="string">
 		SELECT
 		password
 		FROM tb_user
@@ -36,7 +36,7 @@
 	</update>
 
 	<!-- 获取最后登录时间 -->
-	<select id="getOnline" parameterType="int" resultType="Date">
+	<select id="getOnline" parameterType="long" resultType="Date">
 		SELECT
 		online
 		FROM tb_user
@@ -51,7 +51,7 @@
 	</update>
 
 	<!-- 获取是否允许登录 -->
-	<select id="getEnable" parameterType="int" resultType="boolean">
+	<select id="getEnable" parameterType="long" resultType="boolean">
 		SELECT
 		enable
 		FROM tb_user

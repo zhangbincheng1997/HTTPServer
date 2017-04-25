@@ -26,14 +26,13 @@ public class Redis {
 			synchronized (Redis.class) {
 				if (instance == null) {
 					instance = new Redis();
-					instance.initData();
 				}
 			}
 		}
 		return instance;
 	}
 
-	private void initData() {
+	public void initData() {
 		// Redis≈‰÷√
 		JedisPoolConfig config = new JedisPoolConfig();
 		config.setMaxTotal(Config.RedisMaxActive);

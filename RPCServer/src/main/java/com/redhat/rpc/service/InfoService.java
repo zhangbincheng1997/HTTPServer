@@ -3,9 +3,9 @@ package com.redhat.rpc.service;
 import com.alibaba.fastjson.JSON;
 import com.redhat.rpc.manager.InfoManager;
 import com.redhat.rpc.model.InfoModel;
-import com.redhat.rpc.model.InfoReq;
-import com.redhat.rpc.protocol.HttpMsg;
-import com.redhat.rpc.protocol.ResultCode;
+import com.redhat.rpc.protocol.Request;
+import com.redhat.rpc.protocol.Response;
+import com.redhat.rpc.protocol.ResponseCode;
 
 /**
  * @author littleredhat
@@ -13,40 +13,38 @@ import com.redhat.rpc.protocol.ResultCode;
 public class InfoService {
 
 	/**
-	 * 获取用户信息
+	 * 获取信息
 	 */
-	public HttpMsg getInfo(HttpMsg msg) {
-		// 获取请求内容
-		InfoReq req = JSON.parseObject(msg.getData(), InfoReq.class);
-
-		// 获取用户信息
-		InfoModel model = InfoManager.getInstance().getInfo(req.getUserId());
+	public Response getInfo(Request msg) {
+		// 获取结果
+		InfoModel model = InfoManager.getInstance().getInfo(msg.getId());
 
 		if (model != null) {
 			// 返回成功响应
-			return new HttpMsg(ResultCode.SUCCESS, JSON.toJSONString(model));
+			return new Response(ResponseCode.SUCCESS, JSON.toJSONString(model));
 		} else {
 			// 返回失败响应
-			return new HttpMsg(ResultCode.S2C_Info_No, null);
+			return new Response(ResponseCode.COMMON_ERR, null);
 		}
 	}
 
 	/**
-	 * 设置用户信息
+	 * 更新信息
 	 */
-	public HttpMsg updateInfo(HttpMsg msg) {
-		// 获取请求内容
+	public Response updateInfo(Request msg) {
+		// 获取内容
+		long id = msg.getId();
 		InfoModel model = JSON.parseObject(msg.getData(), InfoModel.class);
 
-		// 获取设置结果
-		boolean res = InfoManager.getInstance().setInfo(model);
+		// 更新结果
+		boolean res = InfoManager.getInstance().updateInfo(id, model);
 
 		if (res) {
 			// 返回成功响应
-			return new HttpMsg(ResultCode.SUCCESS, null);
+			return new Response(ResponseCode.SUCCESS, JSON.toJSONString(model));
 		} else {
 			// 返回失败响应
-			return new HttpMsg(ResultCode.S2C_Info_No, null);
+			return new Response(ResponseCode.COMMON_ERR, null);
 		}
 	}
 }

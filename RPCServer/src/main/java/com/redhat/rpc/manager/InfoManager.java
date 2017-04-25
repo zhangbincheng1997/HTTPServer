@@ -27,14 +27,14 @@ public class InfoManager {
 		return instance;
 	}
 
-	// 获取用户信息
-	public InfoModel getInfo(int userId) {
+	// 获取信息
+	public InfoModel getInfo(long id) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
 			InfoMapper infoMapper = sqlSession.getMapper(InfoMapper.class);
 			// 执行事务
-			InfoModel model = infoMapper.getInfo(userId);
+			InfoModel model = infoMapper.getInfo(id);
 			sqlSession.commit();
 			// 返回结果
 			return model;
@@ -49,14 +49,14 @@ public class InfoManager {
 		return null;
 	}
 
-	// 设置用户信息
-	public boolean setInfo(InfoModel model) {
+	// 更新信息
+	public boolean updateInfo(long id, InfoModel info) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
 			InfoMapper infoMapper = sqlSession.getMapper(InfoMapper.class);
 			// 执行事务
-			boolean result = infoMapper.setInfo(model);
+			boolean result = infoMapper.updateInfo(id, info);
 			sqlSession.commit();
 			// 返回结果
 			return result;

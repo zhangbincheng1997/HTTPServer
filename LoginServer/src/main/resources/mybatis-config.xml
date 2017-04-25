@@ -6,7 +6,7 @@
 <configuration>
 	<!-- 别名 -->
 	<typeAliases>
-		<!-- <typeAlias alias="user" type="com.redhat.login.model.UserModel" /> -->
+		<typeAlias alias="user" type="com.redhat.login.model.UserModel" />
 	</typeAliases>
 
 	<!-- 对事务的管理和连接池的配置 -->

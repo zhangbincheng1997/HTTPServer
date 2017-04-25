@@ -5,50 +5,30 @@ package com.redhat.login.model;
  */
 public class UserModel {
 
-	private int id; // 用户id
-	private String session; // 用户session
-	private String gateIp; // gate ip
-	private int gatePort; // gate port
+	private String username; // 用户名
+	private String password; // 密码
 
 	public UserModel() {
 	}
 
-	public UserModel(int id, String session, int gatePort, String gateIp) {
-		this.id = id;
-		this.session = session;
-		this.gateIp = gateIp;
-		this.gatePort = gatePort;
+	public UserModel(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 
-	public int getId() {
-		return id;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getSession() {
-		return session;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSession(String session) {
-		this.session = session;
-	}
-
-	public String getGateIp() {
-		return gateIp;
-	}
-
-	public void setGateIp(String gateIp) {
-		this.gateIp = gateIp;
-	}
-
-	public int getGatePort() {
-		return gatePort;
-	}
-
-	public void setGatePort(int gatePort) {
-		this.gatePort = gatePort;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

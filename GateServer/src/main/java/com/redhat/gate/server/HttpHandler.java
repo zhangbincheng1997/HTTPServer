@@ -1,17 +1,13 @@
 package com.redhat.gate.server;
 
-import java.net.URLDecoder;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.redhat.gate.core.GameServer;
-import com.redhat.gate.protocol.Consts;
-import com.redhat.gate.protocol.HttpMsg;
-import com.redhat.gate.protocol.ResultCode;
+import com.redhat.gate.protocol.Response;
+import com.redhat.gate.protocol.ResponseCode;
 import com.redhat.gate.util.AES;
-import com.redhat.gate.util.Authentication;
 import com.redhat.gate.util.Coder;
 import com.redhat.gate.util.Config;
 
@@ -37,10 +33,6 @@ import io.netty.util.CharsetUtil;
 public class HttpHandler extends ChannelHandlerAdapter {
 	private static Logger logger = LoggerFactory.getLogger(HttpHandler.class);
 
-	// DEBUG 测试请求是否全部到达服务端
-	private static int cnt = 0; // 计数
-	private static Object xlock = new Object(); // 加锁
-
 	/**
 	 * Netty读取消息
 	 */
@@ -49,11 +41,6 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		if (!GameServer.getInstance().getShutdown()) {
 			// 获取请求
 			DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
-
-			/*
-			 * // DEBUG for (Entry<String, String> k : req.headers().entries())
-			 * { logger.info(k.getKey() + " " + k.getValue()); }
-			 */
 
 			// 处理get请求
 			if (req.getMethod() == HttpMethod.GET) {
@@ -66,7 +53,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		}
 		// 服务器已关闭
 		else {
-			writeJSON(ctx, new HttpMsg(ResultCode.SERVER_ERR, null));
+			writeJSON(ctx, new Response(ResponseCode.SERVER_ERR, null));
 		}
 	}
 
@@ -74,47 +61,17 @@ public class HttpHandler extends ChannelHandlerAdapter {
 
 	// GET请求处理
 	private void getHandle(final ChannelHandlerContext ctx, DefaultFullHttpRequest req) {
+		// 获取消息
 		// String msg = req.content().toString(CharsetUtil.UTF_8);
-		writeJSON(ctx, HttpResponseStatus.NOT_IMPLEMENTED, new HttpMsg(ResultCode.COMMON_ERR, null));
+		writeJSON(ctx, HttpResponseStatus.NOT_IMPLEMENTED, new Response(ResponseCode.COMMON_ERR, null));
 	}
 
 	// POST请求处理
 	private void postHandle(final ChannelHandlerContext ctx, final DefaultFullHttpRequest req) {
-
-		// 获取session字符串
-		String _session = req.headers().get(Consts.SESSION_GET);
-		// 获取session
-		String session = _session.split(";")[0];
-		// 获取id
-		int id = Integer.parseInt(_session.split(";")[1]);
-		// 获取认证结果
-		boolean res = Authentication.getInstancce().checkSession(id, session);
-		// 认证失败
-		if (!res) {
-			writeJSON(ctx, new HttpMsg(ResultCode.AUTH_ERR, null));
-			return;
-		}
-
 		// 获取消息
 		String msg = req.content().toString(CharsetUtil.UTF_8);
 		if (msg != null) {
-			try {
-				// 存在 % 需要URL解码
-				msg = msg.contains("%") ? URLDecoder.decode(msg, Consts.UTF8) : msg;
-				// 解密 true使用AES false使用Base64
-				msg = Config.UseAES ? new String(AES.AESDecode(Consts.AES_KEY, msg))
-						: new String(Coder.decodeFromBase64(msg));
-
-				// DEBUG
-				synchronized (xlock) {
-					logger.info("消息 " + ++cnt + " : " + msg);
-				}
-
-				// Handle处理
-				RPCClient.getInstance().handle(msg, ctx);
-			} catch (Exception e) {
-				writeJSON(ctx, new HttpMsg(ResultCode.COMMON_ERR, null));
-			}
+			Filter.getInstance().doFilter(msg, ctx);
 		}
 	}
 
@@ -131,7 +88,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			sentMsg = JSON.toJSONString(msg);
 		}
 		// 加密 true使用AES false使用Base64
-		sentMsg = Config.UseAES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
+		sentMsg = Config.USE_AES ? AES.AESEncode(Config.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
 		writeJSON(ctx, status, Unpooled.copiedBuffer(sentMsg, CharsetUtil.UTF_8));
 	}
 
@@ -146,7 +103,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			sentMsg = JSON.toJSONString(msg);
 		}
 		// 加密 true使用AES false使用Base64
-		sentMsg = Config.UseAES ? AES.AESEncode(Consts.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
+		sentMsg = Config.USE_AES ? AES.AESEncode(Config.AES_KEY, sentMsg) : Coder.encodeToBase64(sentMsg);
 		writeJSON(ctx, HttpResponseStatus.OK, Unpooled.copiedBuffer(sentMsg, CharsetUtil.UTF_8));
 	}
 
@@ -161,7 +118,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			if (content != null) {
 				msg = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, content);
 				// Http固定头部
-				msg.headers().set(HttpHeaders.Names.CONTENT_TYPE, Consts.CONTENT_TYPE);
+				msg.headers().set(HttpHeaders.Names.CONTENT_TYPE, "application/json; charset=utf-8");
 			} else {
 				msg = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status);
 			}
@@ -180,6 +137,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 	 * Netty抛出异常
 	 */
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		logger.error(cause.getMessage());
+		logger.error("HttpHandler错误!!!");
+		cause.printStackTrace();
 	}
 }

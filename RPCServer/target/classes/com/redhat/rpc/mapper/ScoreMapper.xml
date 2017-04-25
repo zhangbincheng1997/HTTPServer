@@ -4,28 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.redhat.rpc.mapper.ScoreMapper">
+	<!-- 是否存在成绩 -->
+	<select id="hasScore" resultType="boolean">
+		SELECT id
+		FROM tb_score
+		WHERE
+		userId = #{userId}
+		AND subject = #{subject}
+	</select>
+
 	<!-- 获取成绩 -->
 	<select id="getScore" resultType="score">
-		SELECT *
+		SELECT subject, score, date
 		FROM tb_score
 		WHERE
 		userId = #{userId}
 	</select>
 
 	<!-- 设置成绩 -->
-	<insert id="setScore" parameterType="score">
-		INSERT INTO
-		tb_score (userId,
-		subject, score)
-		VALUES (#{userId}, #{subject}, #{score})
+	<insert id="setScore">
+		INSERT INTO tb_score(userId, subject, score, date)
+		VALUES (#{userId}, #{score.subject}, #{score.score}, #{score.date})
 	</insert>
 
 	<!-- 更新成绩 -->
-	<update id="updateScore" parameterType="score">
-		UPDATE tb_score
-		SET score
-		= #{score}
-		WHERE userId = #{userId}
-		AND subject = #{subject}
+	<update id="updateScore">
+		UPDATE tb_score SET
+		score = #{score.score},
+		date = #{score.date}
+		WHERE
+		userId = #{userId}
+		AND
+		subject = #{score.subject}
 	</update>
 </mapper>

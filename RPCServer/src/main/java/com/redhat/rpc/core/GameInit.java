@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.redhat.rpc.core.GameServer;
+import com.redhat.rpc.server.RPCServer;
 import com.redhat.rpc.util.Config;
 import com.sun.jdmk.comm.HtmlAdaptorServer;
 
@@ -23,7 +24,10 @@ public class GameInit {
 	 * Main
 	 */
 	public static void main(String[] args) throws Exception {
-		if (Config.UseNet) { // Õ¯“≥∆Ù∂Ø
+		// RPCServer∆Ù∂Ø
+		RPCServer.getInstance().initData();
+
+		if (Config.USE_AES) { // Õ¯“≥∆Ù∂Ø
 			JMXOpen();
 		} else { // ≤‚ ‘
 			GameServer.getInstance().startServer();
@@ -48,6 +52,6 @@ public class GameInit {
 		// ¥¥Ω®adapter
 		adapter.start();
 
-		logger.info("Init at {}:{}", Config.NodeIp, Config.NodeNetPort);
+		logger.info("GameInit at {}:{}", Config.NodeIp, Config.NodeNetPort);
 	}
 }

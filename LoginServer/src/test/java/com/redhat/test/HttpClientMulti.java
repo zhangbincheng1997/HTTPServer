@@ -6,29 +6,40 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSON;
+import com.redhat.login.model.LoginModel;
 import com.redhat.login.model.UserModel;
-import com.redhat.login.model.UserReq;
-import com.redhat.login.protocol.Consts;
-import com.redhat.login.protocol.HttpMsg;
+import com.redhat.login.protocol.Request;
 import com.redhat.login.protocol.RequestCode;
-import com.redhat.login.protocol.ResultCode;
+import com.redhat.login.protocol.Response;
+import com.redhat.login.protocol.ResponseCode;
+import com.redhat.login.protocol.SubCode;
 import com.redhat.login.util.Coder;
 
 /**
  * @author littleredhat
  */
 public class HttpClientMulti {
+	private static Logger logger = LoggerFactory.getLogger(HttpClientMulti.class);
 	// 并发线程数
-	private static int CNT = 1600;
+	private static int CNT = 800;
+
+	/**
+	 * DEBUG
+	 */
+	private static int cnt = 0;
+	private static Object xlock = new Object();
 
 	public static void main(String[] args) throws Exception {
 
 		for (int i = 0; i < CNT; ++i) {
 			Thread t = new Thread(new Runnable() {
 				public void run() {
-					int id = 0;
-					String session = null;
+					long id = 0;
+					String token = null;
 					String ip = "127.0.0.1";
 					int port = 9901;
 					String username = "maomao";
@@ -37,49 +48,53 @@ public class HttpClientMulti {
 					////////// 请求 //////////
 
 					// login
-					UserReq user = new UserReq(username, Coder.encodeToMD5(password));
-					HttpMsg msg = new HttpMsg(RequestCode.C2S_Login, JSON.toJSONString(user));
-					String str = JSON.toJSONString(msg);
+					UserModel user = new UserModel(username, Coder.encodeToMD5(password));
+					Request req = new Request(id, token, RequestCode.USER, SubCode.Login, JSON.toJSONString(user));
+					String str = JSON.toJSONString(req);
 					String data = Coder.encodeToBase64(str);
-					// 登录结果
+					// 用户登录结果
 					String res = null;
 					try {
-						res = task(id, session, ip, port, data);
+						res = task(id, token, ip, port, data);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 					System.out.println("login ==> " + res);
-					HttpMsg resMsg = JSON.parseObject(res, HttpMsg.class);
-					if (resMsg.getCode() == ResultCode.SUCCESS) {
-						UserModel model = JSON.parseObject(resMsg.getData(), UserModel.class);
+					Response resMsg = JSON.parseObject(res, Response.class);
+					if (resMsg.getResponseCode() == ResponseCode.SUCCESS) {
+						LoginModel model = JSON.parseObject(resMsg.getData(), LoginModel.class);
 						// 设置登录数据
 						id = model.getId();
-						session = model.getSession();
+						token = model.getToken();
 						port = model.getGatePort();
 						ip = model.getGateIp();
 
 						////////// 请求 //////////
 
 						// getInfo
-						InfoReq info = new InfoReq(id);
-						HttpMsg msg2 = new HttpMsg(RequestCode.C2S_Get_Info, JSON.toJSONString(info));
+						Request msg2 = new Request(id, token, RequestCode.INFO, SubCode.GetInfo, null);
 						String str2 = JSON.toJSONString(msg2);
 						String data2 = Coder.encodeToBase64(str2);
-						// 获取用户信息结果
+						// 获取信息结果
 						String res2 = null;
 						try {
-							res2 = task(id, session, ip, port, data2);
+							res2 = task(id, token, ip, port, data2);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
 						System.out.println("getInfo ==> " + res2);
-						HttpMsg resMsg2 = JSON.parseObject(res2, HttpMsg.class);
-						if (resMsg2.getCode() == ResultCode.SUCCESS) {
-							System.out.println("获取成功!!!");
+						Response resMsg2 = JSON.parseObject(res2, Response.class);
+						if (resMsg2.getResponseCode() == ResponseCode.SUCCESS) {
+
+							// DEBUG
+							synchronized (xlock) {
+								logger.info("获取成功!!!" + ++cnt);
+							}
+
 						} else {
 							System.out.println("获取失败!!!");
 						}
@@ -93,19 +108,13 @@ public class HttpClientMulti {
 	}
 
 	// 发送请求
-	private static String task(int id, String session, final String ip, final int port, final String params)
+	private static String task(long id, String session, final String ip, final int port, final String params)
 			throws Exception {
 		// 更新url
 		URL url = new URL("http://" + ip + ":" + port);
 		// openConnection
 		HttpURLConnection http = (HttpURLConnection) url.openConnection();
 		http.setDoOutput(true);
-		// session非空则设置
-		if (session != null && !session.isEmpty()) {
-			String _session = session + ";" + id;
-			// 设置session
-			http.setRequestProperty(Consts.SESSION_GET, _session);
-		}
 
 		// getOutputStream
 		OutputStreamWriter out = new OutputStreamWriter(http.getOutputStream(), "UTF-8");

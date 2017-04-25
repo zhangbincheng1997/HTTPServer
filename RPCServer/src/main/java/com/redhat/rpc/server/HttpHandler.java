@@ -3,8 +3,6 @@ package com.redhat.rpc.server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.redhat.rpc.protocol.Consts;
-import com.redhat.rpc.protocol.RPCCode;
 import com.redhat.rpc.server.HttpHandler;
 
 import io.netty.buffer.ByteBuf;
@@ -34,7 +32,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 		// 获取请求
 		DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
 		// 获取类型
-		String rpcType = req.headers().get(RPCCode.RPC_TYPE);
+		String rpcType = req.headers().get("TYPE");
 		// 确认节点
 		if (rpcType != null) {
 
@@ -61,7 +59,7 @@ public class HttpHandler extends ChannelHandlerAdapter {
 			if (content != null) {
 				msg = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, content);
 				// Http固定头部
-				msg.headers().set(HttpHeaders.Names.CONTENT_TYPE, Consts.CONTENT_TYPE);
+				msg.headers().set(HttpHeaders.Names.CONTENT_TYPE, "application/json; charset=utf-8");
 			} else {
 				msg = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status);
 			}

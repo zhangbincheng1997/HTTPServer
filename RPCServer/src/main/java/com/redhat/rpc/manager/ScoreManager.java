@@ -29,36 +29,13 @@ public class ScoreManager {
 		return instance;
 	}
 
-	// 获取成绩
-	public List<ScoreModel> getScore(int userId) {
+	public boolean hasScore(long userId, int subject) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
 			ScoreMapper scoreMapper = sqlSession.getMapper(ScoreMapper.class);
 			// 执行事务
-			List<ScoreModel> modelList = scoreMapper.getScore(userId);
-			sqlSession.commit();
-			// 返回结果
-			return modelList;
-		} catch (Exception ex) {
-			logger.error(ex.getMessage());
-			sqlSession.rollback();
-		} finally {
-			if (sqlSession != null) {
-				sqlSession.close();
-			}
-		}
-		return null;
-	}
-
-	// 设置成绩
-	public boolean setScore(ScoreModel model) {
-		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
-		try {
-			// 获取映射
-			ScoreMapper scoreMapper = sqlSession.getMapper(ScoreMapper.class);
-			// 执行事务
-			boolean result = scoreMapper.setScore(model);
+			boolean result = scoreMapper.hasScore(userId, subject);
 			sqlSession.commit();
 			// 返回结果
 			return result;
@@ -73,14 +50,58 @@ public class ScoreManager {
 		return false;
 	}
 
-	// 更新成绩
-	public boolean updateScore(ScoreModel model) {
+	// 获取信息
+	public List<ScoreModel> getScore(long userId) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
 			ScoreMapper scoreMapper = sqlSession.getMapper(ScoreMapper.class);
 			// 执行事务
-			boolean result = scoreMapper.updateScore(model);
+			List<ScoreModel> scoreList = scoreMapper.getScore(userId);
+			sqlSession.commit();
+			// 返回结果
+			return scoreList;
+		} catch (Exception ex) {
+			logger.error(ex.getMessage());
+			sqlSession.rollback();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return null;
+	}
+
+	// 设置信息
+	public boolean setScore(long userId, ScoreModel score) {
+		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+		try {
+			// 获取映射
+			ScoreMapper scoreMapper = sqlSession.getMapper(ScoreMapper.class);
+			// 执行事务
+			boolean result = scoreMapper.setScore(userId, score);
+			sqlSession.commit();
+			// 返回结果
+			return result;
+		} catch (Exception ex) {
+			logger.error(ex.getMessage());
+			sqlSession.rollback();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return false;
+	}
+
+	// 更新信息
+	public boolean updateScore(long userId, ScoreModel score) {
+		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+		try {
+			// 获取映射
+			ScoreMapper scoreMapper = sqlSession.getMapper(ScoreMapper.class);
+			// 执行事务
+			boolean result = scoreMapper.updateScore(userId, score);
 			sqlSession.commit();
 			// 返回结果
 			return result;

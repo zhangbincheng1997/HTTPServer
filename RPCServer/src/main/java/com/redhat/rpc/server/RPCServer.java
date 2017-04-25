@@ -7,9 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.googlecode.jsonrpc4j.JsonRpcServer;
-import com.redhat.rpc.protocol.RPCCode;
+import com.redhat.rpc.protocol.RequestCode;
 import com.redhat.rpc.service.InfoService;
-import com.redhat.rpc.service.MailService;
 import com.redhat.rpc.service.ScoreService;
 
 /**
@@ -27,24 +26,20 @@ public class RPCServer {
 			synchronized (RPCServer.class) {
 				if (instance == null) {
 					instance = new RPCServer();
-					instance.initData();
 				}
 			}
 		}
 		return instance;
 	}
 
-	private void initData() {
+	public void initData() {
 		rpcServer = new HashMap<String, JsonRpcServer>();
 		// info
 		JsonRpcServer infoServer = new JsonRpcServer(new InfoService(), InfoService.class);
-		rpcServer.put(RPCCode.TYPE_INFO, infoServer);
+		rpcServer.put(Integer.toString(RequestCode.INFO), infoServer);
 		// score
 		JsonRpcServer scoreServer = new JsonRpcServer(new ScoreService(), ScoreService.class);
-		rpcServer.put(RPCCode.TYPE_SCORE, scoreServer);
-		// mail
-		JsonRpcServer mailServer = new JsonRpcServer(new MailService(), MailService.class);
-		rpcServer.put(RPCCode.TYPE_MAIL, mailServer);
+		rpcServer.put(Integer.toString(RequestCode.SCORE), scoreServer);
 	}
 
 	/**

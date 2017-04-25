@@ -5,10 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.redhat.login.server.HttpHandler;
-import com.redhat.login.protocol.ResultCode;
 import com.redhat.login.handler.UserHandler;
-import com.redhat.login.protocol.HttpMsg;
+import com.redhat.login.model.UserModel;
+import com.redhat.login.protocol.Request;
 import com.redhat.login.protocol.RequestCode;
+import com.redhat.login.protocol.Response;
+import com.redhat.login.protocol.ResponseCode;
+import com.redhat.login.protocol.SubCode;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -39,37 +42,30 @@ public class Router {
 	/**
 	 * Route处理
 	 */
-	public void route(String msg, ChannelHandlerContext ctx) {
-		// 获取消息
-		HttpMsg httpMsg = null;
-		try {
-			httpMsg = JSON.parseObject(msg, HttpMsg.class);
-		} catch (Exception e) {
-			logger.error("格式错误");
-			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.PROTO_ERR, null));
-			return;
-		}
+	public void route(Request msg, ChannelHandlerContext ctx) {
 		// 消息处理
-		switch (httpMsg.getCode()) {
+		switch (msg.getRequestCode()) {
 		case RequestCode.TEST:
 			logger.info("Router TEST");
-			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.SUCCESS, null));
+			HttpHandler.writeJSON(ctx, new Response(ResponseCode.SUCCESS, null));
 			break;
-		case RequestCode.C2S_Login: {
-			logger.info("Router C2S_Login");
-			HttpMsg res = UserHandler.login(httpMsg);
-			HttpHandler.writeJSON(ctx, res);
+		case RequestCode.USER:
+			// 登录
+			if (msg.getSubCode().equals(SubCode.Login)) {
+				logger.info("Router Login");
+				Response res = UserHandler.login(JSON.parseObject(msg.data, UserModel.class));
+				HttpHandler.writeJSON(ctx, res);
+			}
+			// 注册
+			else if (msg.getSubCode().equals(SubCode.Register)) {
+				logger.info("Router Register");
+				Response res = UserHandler.register(JSON.parseObject(msg.data, UserModel.class));
+				HttpHandler.writeJSON(ctx, res);
+			}
 			break;
-		}
-		case RequestCode.C2S_Register: {
-			logger.info("Router C2S_Register");
-			HttpMsg res = UserHandler.register(httpMsg);
-			HttpHandler.writeJSON(ctx, res);
-			break;
-		}
 		default:
 			logger.error("无协议号");
-			HttpHandler.writeJSON(ctx, new HttpMsg(ResultCode.PROTO_ERR, null));
+			HttpHandler.writeJSON(ctx, new Response(ResponseCode.PROTO_ERR, null));
 			break;
 		}
 	}

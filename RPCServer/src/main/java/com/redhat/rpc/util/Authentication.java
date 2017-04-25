@@ -2,7 +2,6 @@ package com.redhat.rpc.util;
 
 import java.util.Date;
 
-import com.redhat.rpc.protocol.Consts;
 import com.redhat.rpc.util.Coder;
 import com.redhat.rpc.util.Redis;
 
@@ -12,60 +11,52 @@ import com.redhat.rpc.util.Redis;
  *         Authnentication工具类
  */
 public class Authentication {
-	private static Authentication instance = null;
-
-	public static Authentication getInstancce() {
-		if (instance == null) {
-			instance = new Authentication();
-		}
-		return instance;
-	}
+	private static String TOKEN_KEY = "KEY";
 
 	/**
-	 * session = md5(key + _ + id + _ + time)
+	 * token = md5(KEY + _ + id + _ + 时间戳)
 	 */
-	public static String getSession(int id) {
-		StringBuilder session = new StringBuilder(Consts.SESSION_KEY);
-		session.append("_");
-		session.append(id);
-		session.append("_");
-		session.append(new Date().getTime() / 1000);
-		return Coder.encodeToMD5(session.toString());
+	public static String getToken(long id) {
+		StringBuilder token = new StringBuilder(TOKEN_KEY);
+		token.append("_");
+		token.append(id);
+		token.append("_");
+		token.append(new Date().getTime() / 1000);
+		return Coder.encodeToMD5(token.toString());
 	}
 
-	public void setSession(int id, String session) {
+	public static void setToken(long id, String token) {
 		// keyX
-		String key = Consts.SESSION_KEY + id;
+		String key = TOKEN_KEY + id;
 		// 不存在才设置
-		// 生存时间为900s
-		Redis.getInstance().set_time(0, session, key, "NX");
+		// token生存时间为900s
+		Redis.getInstance().set_time(0, token, key, "NX");
 	}
 
 	/**
-	 * 判断id与session对应id是否一致
+	 * 判断id与token对应id是否一致
 	 */
-	public boolean checkSession(int id, String session) {
-		int id_server = getId(session);
-		if (id == id_server) {
-			// keyX
-			String key = Consts.SESSION_KEY + id;
+	public static boolean checkToken(long id, String token) {
+		// keyX
+		String key = TOKEN_KEY + id;
+		// keyX
+		String key_server = getKey(token);
+		// key_server可能为null
+		if (key.equals(key_server)) {
 			// 存在才设置
-			// 刷新session生存时间
-			Redis.getInstance().set_time(0, session, key, "XX");
+			// 刷新token生存时间
+			Redis.getInstance().set_time(0, token, key_server, "XX");
 			return true;
 		}
 		return false;
 	}
 
-	// 根据session获取id
-	private int getId(String session) {
-		boolean res = Redis.getInstance().exists(0, session);
+	// 根据token获取key
+	private static String getKey(String token) {
+		boolean res = Redis.getInstance().exists(0, token);
 		if (res) {
-			String key = Redis.getInstance().get(0, session);
-			// 存入redis的id格式为keyX
-			// 所以要从key_后面开始截取X
-			return Integer.parseInt(key.substring(Consts.SESSION_KEY.length()));
+			return Redis.getInstance().get(0, token);
 		}
-		return -1;
+		return null;
 	}
 }

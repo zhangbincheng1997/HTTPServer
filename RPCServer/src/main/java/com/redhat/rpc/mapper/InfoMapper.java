@@ -1,5 +1,7 @@
 package com.redhat.rpc.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.redhat.rpc.model.InfoModel;
 
 /**
@@ -7,9 +9,9 @@ import com.redhat.rpc.model.InfoModel;
  */
 public interface InfoMapper {
 
-	// 获取用户信息
-	public InfoModel getInfo(int userId);
+	// 获取信息
+	public InfoModel getInfo(long id);
 
-	// 更新用户信息
-	public boolean setInfo(InfoModel model);
+	// 更新信息
+	public boolean updateInfo(@Param("id") long id, @Param("info") InfoModel info);
 }

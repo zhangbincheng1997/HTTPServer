@@ -8,7 +8,6 @@
 	<typeAliases>
 		<typeAlias alias="info" type="com.redhat.rpc.model.InfoModel" />
 		<typeAlias alias="score" type="com.redhat.rpc.model.ScoreModel" />
-		<typeAlias alias="mail" type="com.redhat.rpc.model.MailModel" />
 	</typeAliases>
 
 	<!-- 对事务的管理和连接池的配置 -->
@@ -29,6 +28,5 @@
 	<mappers>
 		<mapper resource="com/redhat/rpc/mapper/InfoMapper.xml" />
 		<mapper resource="com/redhat/rpc/mapper/ScoreMapper.xml" />
-		<mapper resource="com/redhat/rpc/mapper/MailMapper.xml" />
 	</mappers>
 </configuration>

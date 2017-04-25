@@ -29,13 +29,13 @@ public class UserManager {
 	}
 
 	// 获取用户Id
-	public int getId(String username) {
+	public long getId(String username) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			// 执行事务
-			int result = userMapper.getId(username);
+			long result = userMapper.getId(username);
 			sqlSession.commit();
 			// 返回结果
 			return result;
@@ -51,7 +51,7 @@ public class UserManager {
 	}
 
 	// 获取用户密码
-	public String getPassword(int id) {
+	public String getPassword(long id) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
@@ -95,7 +95,7 @@ public class UserManager {
 	}
 
 	// 更新最后登陆时间
-	public boolean updateOnline(int id, Date date) {
+	public boolean updateOnline(long id, Date date) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
@@ -117,7 +117,7 @@ public class UserManager {
 	}
 
 	// 获取最后登陆时间
-	public Date getOnline(int id) {
+	public Date getOnline(long id) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
@@ -139,7 +139,7 @@ public class UserManager {
 	}
 
 	// 更新是否允许登录
-	public boolean updateEnable(int id, boolean enable) {
+	public boolean updateEnable(long id, boolean enable) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
@@ -161,7 +161,7 @@ public class UserManager {
 	}
 
 	// 获取是否允许登录
-	public boolean getEnable(int id) {
+	public boolean getEnable(long id) {
 		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
 		try {
 			// 获取映射
