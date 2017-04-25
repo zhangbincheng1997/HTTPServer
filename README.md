@@ -4,7 +4,7 @@
 此Demo为个人兴趣所写，是本人通过半年多服务端学习的一次大胆尝试，将之前学到的很多知识都融合在一起，除了对以前的知识整合之外，也不断进行改变和创新！目前该项目还是一个简单框架，可能未来发展还会加入更多新鲜元素，尽请期待！
 
 ## 关键技术
-Maven、Netty、JSON-RPC、MySQL、Mybatis、Redis、Jedis、Base64、AES、MD5、JMX、slf4j、token验证、反向代理、路由分发、双重锁单例等。
+Maven、Netty、JSON-RPC、MySQL、Mybatis、Redis、Jedis、Base64、AES、MD5、JMX、slf4j、口令验证、反向代理、路由分发、双重锁单例等。
 
 ## HTTP弱联网
 一般来说弱联网包含单机游戏和联网游戏的特点，既允许离线游戏又允许联网游戏。普遍适用于交互需求较低的游戏，例如消消乐、卡牌、跑酷等。通常使用HTTP协议实现客户端与服务端之间的通讯，客户端请求一次，服务端响应后立即断开。优势在于减少服务端网络带宽，同时客户端在没有稳定的网络条件下还可以保证游戏效果！我们项目没有采用Tomcat开发HTTP服务端，而是采用Netty开发HTTP服务端，Netty作为开源NIO框架，提供异步的、事件驱动的网络应用程序框架，能够支持大量用户并发行为。
@@ -108,7 +108,7 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 ----SubCode，子请求码  
 `util`包：  
 ----AES，高级对称加密算法  
-----Authentication，token生成、token认证  
+----Authentication，口令生成、口令认证  
 ----Coder，Base64加解密、MD5、SHA1加密  
 ----Config，初始配置  
 ----Property，读取配置  
@@ -128,7 +128,7 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 ----LoginModel，登录模型  
 ----UserModel，用户模型  
 `server`包：  
-----Filter，消息解析、token验证类  
+----Filter，消息解析、口令验证类  
 ----HttpHandler，消息接收、发送处理类  
 ----HttpServer，由Netty实现的HTTP服务端  
 ----Router，转发消息到对应Handler处理  
@@ -148,7 +148,7 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 ----InfoMapper，信息Mybatis映射类  
 ----ScoreMapper，成绩Mybatis映射类  
 `model`包：  
-----InfoModel，用户信息模型  
+----InfoModel，信息模型  
 ----ScoreModel，成绩模型  
 `server`包：  
 ----HttpHandler，消息接收、发送处理类  
@@ -159,7 +159,7 @@ public static final String UpdateScore = "updateScore"; // 更新成绩
 ----ScoreService，处理客户端的成绩RPC请求  
 
 ## 书籍推荐
-项目中用到了Netty和Mybatis，而这两者的技术都不是几句话能够说清楚道明白的，所以推荐两本书籍`《Netty权威指南》`和`《深入浅出Mybatis技术原理与实战》`，看完基本能够了解使用。Netty是别人封装好的网络层开源框架，Mybatis则是别人封装好的数据库开源框架，所以仅仅依赖这两本书是无法深入理解服务端开发的。要想了解网络底层，你需要看`《Unix网络编程》`来学习Unix、Linux下的原始套接字编程，另外辅助以`《Unix环境高级编程》`来学习Unix、Linux下的服务端开发。最后如果能够了解计算机硬件就更好了，这时候就需要`《深入理解计算机系统》`这本书了！以上的书我都看过，我可以负责任地告诉大家，这几本都不好读，也许你读了前几章还是十分感兴趣的，但是估计坚持不了多几章就虚了。服务端不好学，要学习请坚持！
+项目中用到了Netty和Mybatis，而这两者的技术都不是几句话就能够说清楚道明白的，这里推荐两本书籍`《Netty权威指南》`和`《深入浅出Mybatis技术原理与实战》`，看完基本能够了解并且使用。Netty是别人封装好的网络层开源框架，Mybatis则是别人封装好的数据库开源框架，所以仅仅依赖这两本书是无法深入理解服务端开发的。要想了解网络底层，你需要看`《Unix网络编程》`来学习Unix、Linux下的原始套接字编程，另外辅助以`《Unix环境高级编程》`来学习Unix、Linux下的服务端开发。最后如果能够了解计算机硬件就更好了，这时候就需要`《深入理解计算机系统》`这本书了！以上的书我都看过，我可以负责任地告诉大家，这几本都不好读，也许你读了前几章还是十分感兴趣的，但是估计坚持不了多几章就虚了。服务端不好学，要学习请坚持：忍得住清贫，耐得住寂寞，禁得起诱惑！
 
   [1]: http://www.littleredhat1997.com/code/TEMP/Img/1.png
   [2]: http://www.littleredhat1997.com/code/TEMP/Img/2.png
